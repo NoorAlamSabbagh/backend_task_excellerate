@@ -1,0 +1,69 @@
+{
+    "APP_MESSAGES": {
+        "SUCCESS": {
+            "errorCode": "success",
+            "message": "Success",
+            "statusCode": 200
+        },
+        "ERROR_VALIDATION": {
+            "errorCode": "requestParamsNotComplete",
+            "message": "Validation Error",
+            "statusCode": 400
+        },
+        "ERROR_SERVER_ERROR": {
+            "errorCode": "serverError",
+            "message": "Server Error",
+            "statusCode": 500
+        },
+        "ERROR_DATA_NOT_FOUND": {
+            "errorCode": "dataNotFound",
+            "message": "No data found",
+            "statusCode": 404
+        },
+        "ALL_FIELDS_REQUIRED": {
+            "errorCode": "allFieldsRequired",
+            "message": "All fields are required",
+            "statusCode": 400
+        },
+        "ERROR": {
+            "errorCode": "error",
+            "message": "Error",
+            "statusCode": 400
+        },
+        "INVALID_EMPLOYEE_COUNT": {
+            "errorCode": "invalidEmployeeCount",
+            "message": "min_employees must be less than or equal to max_employees and both must be positive",
+            "statusCode": 400
+        },
+        "INVALID_DATE_FORMAT": {
+            "errorCode": "invalidDateFormat",
+            "message": "Date must be in ddmmyyyy format",
+            "statusCode": 400
+        },
+        "COURSE_ADDED_SUCCESSFULLY": {
+            "errorCode": "courseAddedSuccessfully",
+            "message": "Course added successfully",
+            "statusCode": 200
+        },
+        "INVALID_EMAIL_FORMAT": {
+            "errorCode": "courseAddedSuccessfully",
+            "message": "Invalid email format",
+            "statusCode": 400
+        },
+        "COURSE_FULL_ERROR": {
+            "errorCode": "courseFullError",
+            "message": "The course is already full. Registration could not be completed.",
+            "statusCode": 409
+        },
+        "SUCCESSFULLY_REGISTERED": {
+            "errorCode": "successfullyRegistered",
+            "message": "successfully registered for the course",
+            "statusCode": 200
+        },
+        "COURSE_ALLOTED_SUCCESSFULLY": {
+            "errorCode": "courseAllotedSuccessfully",
+            "message": "successfully alloted course to registered employees",
+            "statusCode": 200
+        }
+    }
+}
