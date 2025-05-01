@@ -1,8 +1,38 @@
 {
   "courses": [
-
+    {
+      "course_id": "OFFERING-PYTHON-ALAM",
+      "course_name": "Python",
+      "instructor_name": "Alam",
+      "start_date": "01012025",
+      "min_employees": 3,
+      "max_employees": 10,
+      "is_allotted": true
+    },
+    {
+      "course_id": "OFFERING-PYTHON-ALAM",
+      "course_name": "Python",
+      "instructor_name": "Alam",
+      "start_date": "01012025",
+      "min_employees": 3,
+      "max_employees": 10,
+      "is_allotted": false
+    }
   ],
   "registrations": [
-    
+    {
+      "registration_id": "ALAM-PYTHON",
+      "employee_name": "Alam",
+      "email": "alame@example.com",
+      "course_id": "OFFERING-PYTHON-ALAM",
+      "status": "ACCEPTED"
+    },
+    {
+      "registration_id": "NOOR-PYTHON",
+      "employee_name": "Noor",
+      "email": "noor@example.com",
+      "course_id": "OFFERING-PYTHON-ALAM",
+      "status": "ACCEPTED"
+    }
   ]
 }
