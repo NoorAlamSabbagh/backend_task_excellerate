@@ -14,10 +14,10 @@ interface ResponseObj {
 interface ResponseData {
   error?: ResponseObj;
   result?: any;
-  responseCode?: number;
+  status?: number;
   message?: string;
   response?: any;
-  status?: boolean;
+  // status?: boolean;
   statusCode?: number;
   statusMessage?: string;
 }
@@ -30,13 +30,15 @@ export const build = (key :string, response : any = {}): any  => {
   const error = (response && response.error) || { message: '' };
   const responseObj = config.get(messagePrefix + error.message) || config.get(messagePrefix + key) || config.get(messagePrefix + "ERROR_SERVER_ERROR");
   return {
-    status: responseObj.statusCode === 200,
-    statusCode: responseObj.errorCode,
-    statusMessage: responseObj.message || response.message,
-    responseCode: responseObj.statusCode,
-    response: response
+    status: responseObj.status,
+    // statusCode: responseObj.errorCode,
+    message: responseObj.message || response.message,
+    // responseCode: responseObj.statusCode,
+    data: response
   };
 };
+
+
 
 /**
  * Build Error Response using http-errors
@@ -57,12 +59,10 @@ export const error = (key: string, exceptionClass: string = 'LogicalException'):
  * @param response The response data to send
  */
 export const sendResponse = (res: Response, response: ResponseData): void => {
-  res.status(response?.responseCode ?? 500).json(response);
+  res.status(200).json(response);
 };
 
-// const isResponseObject = (responseObj: ResponseObj): boolean => {
-//   return responseObj.statusCode && responseObj.responseCode ? true : false;
-// };
+
 
 function isResponseObject(obj: unknown): obj is ResponseObj {
   return !!obj && typeof obj === 'object' && 'statusCode' in obj && 'responseCode' in obj;

@@ -83,7 +83,7 @@ class RegistrationController {
             //         }
             //     }
             // });
-            console.log("error", error);
+            // console.log("error", error);
             return sendResponse(res, build("ERROR", { message: error.message }));
         }
     }
