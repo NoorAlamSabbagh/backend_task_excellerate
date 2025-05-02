@@ -32,11 +32,11 @@ class CourseController {
         try {
             const { course_name, instructor_name, start_date, min_employees, max_employees } = req.body;
             if (!course_name || !instructor_name || !start_date || !min_employees || !max_employees) {
-                return sendResponse(res, build("ALL_FIELDS_REQUIRED"));
+                return sendResponse(res, build("ALL_FIELDS_REQUIRED", { failure: { message: "ALL_FIELDS_REQUIRED" } }));
             }else if (parseInt(min_employees) <= 0 || parseInt(max_employees) <= 0 || parseInt(min_employees) > parseInt(max_employees)) {
-                return sendResponse(res, build("INVALID_EMPLOYEE_COUNT"));
+                return sendResponse(res, build("INVALID_EMPLOYEE_COUNT", {failure: {message:"INVALID_EMPLOYEE_COUNT"}}));
             }else if (!validateDate(start_date)) {
-                return sendResponse(res, build("INVALID_DATE_FORMAT", {failure: {message:"ALL_FIELDS_REQUIRED"}}));
+                return sendResponse(res, build("INVALID_DATE_FORMAT", {failure: {message:"INVALID_DATE_FORMAT"}}));
             }else{
             const courseInput: CourseInput = {
                 course_name,

@@ -17,31 +17,10 @@ class RegistrationController {
 
             // Validate input
             if (!employee_name || !email || !course_id) {
-                // return res.status(400).json({
-                //     status: 400,
-                //     message: "All fields are required",
-                //     data: {
-                //         failure: {
-                //             message: "All fields are required"
-                //         }
-                //     }
-                // });
-                return sendResponse(res, build("ALL_FIELDS_REQUIRED"));
-            }
-            if (!validateEmail(email)) {
-                // return res.status(400).json({
-                //     status: 400,
-                //     message: "Invalid email format",
-                //     data: {
-                //         failure: {
-                //             message: "Invalid email format"
-                //         }
-                //     }
-                // });
-                return sendResponse(res, build("INVALID_EMAIL_FORMAT"));
-            }
-
-            const registrationInput = {
+                return sendResponse(res, build("ALL_FIELDS_REQUIRED", { failure: { message: "ALL_FIELDS_REQUIRED" } }));
+            }else if (!validateEmail(email)) {
+                return sendResponse(res, build("INVALID_EMAIL_FORMAT", { failure: { message: "INVALID_EMAIL_FORMAT" } }));
+            }else {const registrationInput = {
                 employee_name,
                 email,
                 course_id
@@ -49,41 +28,12 @@ class RegistrationController {
 
             const registration = await RegistrationService.registerForCourse(registrationInput);
             if (registration.status === 'COURSE_FULL_ERROR') {
-                // return res.status(200).json({
-                //     status: 200,
-                //     message: `course ${course_id} is full`,
-                //     data: {
-                //         success: {
-                //             registration_id: registration.registration_id,
-                //             status: registration.status
-                //         }
-                //     }
-                // });
-                return sendResponse(res, build("COURSE_FULL_ERROR"));
+                return sendResponse(res, build("COURSE_FULL_ERROR", { failure: { message: "COURSE_FULL_ERROR" } }));
             }
-
-            // return res.status(200).json({
-            //     status: 200,
-            //     message: `successfully registered for ${course_id}`,
-            //     data: {
-            //         success: {
-            //             registration_id: registration.registration_id,
-            //             status: registration.status
-            //         }
-            //     }
-            // });
-            return sendResponse(res, build("SUCCESSFULLY_REGISTERED", { course_id, registration_id: registration.registration_id, status: registration.status }));
+            return sendResponse(res, build("SUCCESSFULLY_REGISTERED", {  sucess: { registration_id: registration.registration_id, status: registration.status }}));
+            }
         } catch (error: any) {
-            // return res.status(400).json({
-            //     status: 400,
-            //     message: error.message,
-            //     data: {
-            //         failure: {
-            //             message: error.message
-            //         }
-            //     }
-            // });
-            // console.log("error", error);
+            console.log("error", error.message);
             return sendResponse(res, build("ERROR", { message: error.message }));
         }
     }

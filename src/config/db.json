@@ -1,10 +1,19 @@
 {
   "courses": [
     {
-      "course_id": "OFFERING-PYTHON-ALAM",
-      "course_name": "Python",
+      "course_id": "OFFERING-JAVA-ALAM",
+      "course_name": "Java",
       "instructor_name": "Alam",
-      "start_date": "15061997",
+      "start_date": "15061998",
+      "min_employees": 3,
+      "max_employees": 10,
+      "is_allotted": false
+    },
+    {
+      "course_id": "OFFERING-JAVA-ALAM",
+      "course_name": "Java",
+      "instructor_name": "Alam",
+      "start_date": "15011999",
       "min_employees": 3,
       "max_employees": 10,
       "is_allotted": false
@@ -16,6 +25,13 @@
       "employee_name": "Alam",
       "email": "alam@example.com",
       "course_id": "OFFERING-PYTHON-ALAM",
+      "status": "ACCEPTED"
+    },
+    {
+      "registration_id": "ALAM-JAVA",
+      "employee_name": "Alam",
+      "email": "alam@example.com",
+      "course_id": "OFFERING-JAVA-ALAM",
       "status": "ACCEPTED"
     }
   ]
