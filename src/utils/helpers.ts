@@ -20,6 +20,5 @@ export const validateDate = (date: string): boolean => {
     const year = parseInt(date.substring(4, 8), 10);
     
     const d = new Date(year, month, day);
-    console.log("d", d);
     return d.getDate() === day && d.getMonth() === month && d.getFullYear() === year;
 };

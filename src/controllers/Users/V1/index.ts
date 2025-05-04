@@ -5,12 +5,10 @@ const router: Router = express.Router({
   strict: true,
 });
 
-import userController from "./controllers/userController";
 import courseController from "./controllers/courseController";
 import registrationController from "./controllers/registrationController";
 
 
-router.post('/get', userController.getUsers);
 // Course routes
 router.post('/add/courseOffering', courseController.addCourse);
 router.post('/allot/:course_id', courseController.allotCourse);

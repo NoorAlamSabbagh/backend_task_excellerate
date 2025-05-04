@@ -30,6 +30,11 @@
             "message": "Error",
             "status": 400
         },
+        "COURSE_ERROR": {
+            "errorCode": "courseError",
+            "message": "Course not found",
+            "status": 400
+        },
         "INVALID_EMPLOYEE_COUNT": {
             "errorCode": "invalidEmployeeCount",
             "message": "min_employees must be less than or equal to max_employees and both must be positive",
@@ -43,6 +48,11 @@
         "COURSE_ADDED_SUCCESSFULLY": {
             "errorCode": "courseAddedSuccessfully",
             "message": "Course added successfully",
+            "status": 200
+        },
+        "SUCCESSFULLY_CANCELLED": {
+            "errorCode": "successfullyCancelled",
+            "message": "successfully cancelled the course",
             "status": 200
         },
         "INVALID_EMAIL_FORMAT": {
@@ -63,6 +73,11 @@
         "COURSE_ALLOTED_SUCCESSFULLY": {
             "errorCode": "courseAllotedSuccessfully",
             "message": "successfully alloted course to registered employees",
+            "status": 200
+        },
+        "ALREADY_REGISTERED" : {
+            "errorCode": "alreadyRegistred",
+            "message": "Course already registered.",
             "status": 200
         }
     }

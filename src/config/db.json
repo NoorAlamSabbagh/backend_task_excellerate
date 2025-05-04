@@ -1,37 +1,62 @@
 {
   "courses": [
     {
-      "course_id": "OFFERING-JAVA-ALAM",
-      "course_name": "Java",
+      "course_id": "OFFERING-REACT-NOOR",
+      "course_name": "React",
+      "instructor_name": "Noor",
+      "start_date": "15021999",
+      "min_employees": 6,
+      "max_employees": 10,
+      "is_allotted": true
+    },
+    {
+      "course_id": "OFFERING-PYTHON-ALAM",
+      "course_name": "Python",
       "instructor_name": "Alam",
-      "start_date": "15061998",
-      "min_employees": 3,
+      "start_date": "15021999",
+      "min_employees": 6,
       "max_employees": 10,
       "is_allotted": false
     },
     {
-      "course_id": "OFFERING-JAVA-ALAM",
-      "course_name": "Java",
-      "instructor_name": "Alam",
-      "start_date": "15011999",
+      "course_id": "OFFERING-JAVASCRIPT-JS",
+      "course_name": "Javascript",
+      "instructor_name": "JS",
+      "start_date": "15021998",
       "min_employees": 3,
-      "max_employees": 10,
+      "max_employees": 15,
+      "is_allotted": true
+    },
+    {
+      "course_id": "OFFERING-GO-GO-LANG",
+      "course_name": "GO",
+      "instructor_name": "GO Lang",
+      "start_date": "15012000",
+      "min_employees": 3,
+      "max_employees": 15,
       "is_allotted": false
     }
   ],
   "registrations": [
     {
-      "registration_id": "ALAM-PYTHON",
-      "employee_name": "Alam",
+      "registration_id": "NOOR-ALAM@EXAMPLE.COM",
+      "employee_name": "Noor",
       "email": "alam@example.com",
-      "course_id": "OFFERING-PYTHON-ALAM",
+      "course_id": "OFFERING-REACT-NOOR",
       "status": "ACCEPTED"
     },
     {
-      "registration_id": "ALAM-JAVA",
+      "registration_id": "ALAM-ALAM@EXAMPLE.COM",
       "employee_name": "Alam",
       "email": "alam@example.com",
-      "course_id": "OFFERING-JAVA-ALAM",
+      "course_id": "OFFERING-JAVASCRIPT-JS",
+      "status": "ACCEPTED"
+    },
+    {
+      "registration_id": "ALAM-ALAM@EXAMPLE.COM",
+      "employee_name": "Alam",
+      "email": "alam@example.com",
+      "course_id": "OFFERING-GO-GO-LANG",
       "status": "ACCEPTED"
     }
   ]

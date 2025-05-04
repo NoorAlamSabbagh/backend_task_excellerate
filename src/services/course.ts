@@ -1,9 +1,9 @@
-import { Course, CourseInput } from "../interfaces/courseInterfaces";
-import { Registration } from "../interfaces/registrationInterface";
-import { generateCourseId } from "../utils/helpers";
+import { Course, CourseInput } from "../model/courseInterfaces";
 import db from "../config/db.json";
 import fs from 'fs';
 import path from 'path';
+import { AllotmentResult, Registration } from "../model/registrationInterface";
+import { generateCourseId } from "../utils/helpers";
 
 // Define a type for the raw registration data from JSON
 interface RawRegistration {
@@ -46,9 +46,12 @@ class CourseModel {
             courses: this.courses,
             registrations: this.registrations
         };
-        fs.writeFileSync(path.join(__dirname, '../../src/config/db.json'), JSON.stringify(data, null, 2));
+        console.log("_dirname", __dirname)
+        fs.writeFileSync(path.join(__dirname, '../config/db.json'), JSON.stringify(data, null, 2));
     }
 
+
+    
     public createCourse(courseInput: CourseInput): Course {
         const course_id = generateCourseId(courseInput.course_name, courseInput.instructor_name);
         
@@ -62,6 +65,39 @@ class CourseModel {
         this.saveToDatabase();
         return newCourse;
     }
+
+    ////////////////////
+   public allotCourse(course_id: string): AllotmentResult[] {
+        const course = this.getCourseById(course_id);
+        if (!course) throw new Error('Course not found');
+
+        const registrations = this.getRegistrationsForCourse(course_id);
+        
+        // Check if minimum employees reached
+        const isCancelled = registrations.length < course.min_employees;
+        
+        // Update registration statuses
+        const results: AllotmentResult[] = registrations.map(reg => {
+            return {
+                registration_id: reg.registration_id,
+                email: reg.email,
+                course_id: reg.course_id,
+                course_name: course.course_name,
+                // instructor_name: course.instructor_name,
+                // start_date: course.start_date,
+                status: isCancelled ? 'COURSE_CANCELED' : 'CONFIRMED'
+            };
+        });
+
+        // Sort by registration_id
+        results.sort((a, b) => a.registration_id.localeCompare(b.registration_id));
+
+        // Mark course as allotted
+        this.updateCourseAllotmentStatus(course_id, true);
+
+        return results;
+    }
+    ////////////
 
     public getCourseById(course_id: string): Course | undefined {
         return this.courses.find(course => course.course_id === course_id);
@@ -82,6 +118,7 @@ class CourseModel {
             this.saveToDatabase();
         }
     }
+
 }
 
 export default new CourseModel();

@@ -62,8 +62,6 @@ export const sendResponse = (res: Response, response: ResponseData): void => {
   res.status(200).json(response);
 };
 
-
-
 function isResponseObject(obj: unknown): obj is ResponseObj {
   return !!obj && typeof obj === 'object' && 'statusCode' in obj && 'responseCode' in obj;
 }

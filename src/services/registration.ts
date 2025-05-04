@@ -1,5 +1,4 @@
-import { Registration, RegistrationInput } from "../interfaces/registrationInterface";
-import { generateRegistrationId } from "../utils/helpers";
+import { Registration } from "../model/registrationInterface";
 import db from "../config/db.json";
 import fs from 'fs';
 import path from 'path';
@@ -19,53 +18,35 @@ class RegistrationModel {
     }
 
      private registrations: Registration[];
-    
         constructor() {
-            // Transform the raw data on initialization
             this.registrations = (db.registrations || []).map(reg => this.transformRegistration(reg));
         }
-    // private registrations: Registration[] = db.registrations || [];
 
     private saveToDatabase(): void {
-        const data = {
-            courses: CourseModel.getAllCourses(),
-            registrations: this.registrations
-        };
-        fs.writeFileSync(path.join(__dirname, '../../src/config/db.json'), JSON.stringify(data, null, 2));
+        try {
+            const data = {
+                courses: CourseModel.getAllCourses(),
+                registrations: this.registrations
+            };
+            fs.writeFileSync(path.join(__dirname, '../config/db.json'), JSON.stringify(data, null, 2));
+            
+        } catch (error) {
+            console.log('insert Error : ', error)
+        }
     }
 
-    public createRegistration(registrationInput: RegistrationInput): Registration {
-        const course = CourseModel.getCourseById(registrationInput.course_id);
-        if (!course) throw new Error('Course not found');
+    public createRegistration(registrationInput: Registration): Registration {
+        this.registrations.push(registrationInput);
+        this.saveToDatabase();
+        return registrationInput;
+    }
 
-        // Check if registration already exists
-        const existingRegistration = this.registrations.find(
-            reg => reg.email === registrationInput.email && 
-                  reg.course_id === registrationInput.course_id
+    public getRegistrationByCondition(email: string, employee_name: string, course_id: string): Registration | undefined {
+        return this.registrations.find(reg =>
+            reg.email === email &&
+            reg.employee_name === employee_name &&
+            reg.course_id === course_id
         );
-        if (existingRegistration) throw new Error('Employee already registered for this course');
-
-        const courseRegistrations = this.getRegistrationsForCourse(registrationInput.course_id);
-        
-        let status: 'ACCEPTED' | 'COURSE_FULL_ERROR' = 'ACCEPTED';
-        if (courseRegistrations.length >= course.max_employees) {
-            status = 'COURSE_FULL_ERROR';
-        }
-
-        const registration_id = generateRegistrationId(registrationInput.employee_name, course.course_name);
-
-        const newRegistration: Registration = {
-            registration_id,
-            ...registrationInput,
-            status
-        };
-
-        if (status === 'ACCEPTED') {
-            this.registrations.push(newRegistration);
-            this.saveToDatabase();
-        }
-
-        return newRegistration;
     }
 
     public getRegistrationById(registration_id: string): Registration | undefined {

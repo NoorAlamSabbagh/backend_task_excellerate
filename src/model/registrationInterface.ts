@@ -20,8 +20,8 @@ export interface AllotmentResult {
     email: string;
     course_id: string;
     course_name: string;
-    instructor_name: string;
-    start_date: string;
+    // instructor_name: string;
+    // start_date: string;
     status: string;
 }
 
