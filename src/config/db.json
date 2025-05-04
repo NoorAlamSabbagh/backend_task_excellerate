@@ -1,63 +1,31 @@
 {
   "courses": [
     {
-      "course_id": "OFFERING-REACT-NOOR",
-      "course_name": "React",
-      "instructor_name": "Noor",
-      "start_date": "15021999",
-      "min_employees": 6,
-      "max_employees": 10,
+      "course_id": "OFFERING-GO1-GO-LANG1",
+      "course_name": "GO1",
+      "instructor_name": "GO Lang1",
+      "start_date": "05052025",
+      "min_employees": 1,
+      "max_employees": 2,
       "is_allotted": true
     },
     {
-      "course_id": "OFFERING-PYTHON-ALAM",
-      "course_name": "Python",
-      "instructor_name": "Alam",
-      "start_date": "15021999",
-      "min_employees": 6,
-      "max_employees": 10,
-      "is_allotted": false
-    },
-    {
-      "course_id": "OFFERING-JAVASCRIPT-JS",
-      "course_name": "Javascript",
-      "instructor_name": "JS",
-      "start_date": "15021998",
-      "min_employees": 3,
-      "max_employees": 15,
-      "is_allotted": true
-    },
-    {
-      "course_id": "OFFERING-GO-GO-LANG",
-      "course_name": "GO",
-      "instructor_name": "GO Lang",
-      "start_date": "15012000",
-      "min_employees": 3,
-      "max_employees": 15,
+      "course_id": "OFFERING-GO2-GO-LANG2",
+      "course_name": "GO2",
+      "instructor_name": "GO Lang2",
+      "start_date": "05052025",
+      "min_employees": 1,
+      "max_employees": 2,
       "is_allotted": false
     }
   ],
   "registrations": [
     {
-      "registration_id": "NOOR-ALAM@EXAMPLE.COM",
-      "employee_name": "Noor",
-      "email": "alam@example.com",
-      "course_id": "OFFERING-REACT-NOOR",
-      "status": "ACCEPTED"
-    },
-    {
-      "registration_id": "ALAM-ALAM@EXAMPLE.COM",
-      "employee_name": "Alam",
-      "email": "alam@example.com",
-      "course_id": "OFFERING-JAVASCRIPT-JS",
-      "status": "ACCEPTED"
-    },
-    {
-      "registration_id": "ALAM-ALAM@EXAMPLE.COM",
-      "employee_name": "Alam",
-      "email": "alam@example.com",
-      "course_id": "OFFERING-GO-GO-LANG",
-      "status": "ACCEPTED"
+      "registration_id": "ALAM12-GO1",
+      "employee_name": "Alam12",
+      "email": "alam@1234.com",
+      "course_id": "OFFERING-GO1-GO-LANG1",
+      "status": "COURSE_FULL_ERROR"
     }
   ]
 }

@@ -89,7 +89,7 @@ class CourseModel {
             };
         });
 
-        // Sort by registration_id
+        // Sort by registration_id in ascending order
         results.sort((a, b) => a.registration_id.localeCompare(b.registration_id));
 
         // Mark course as allotted
@@ -101,6 +101,10 @@ class CourseModel {
 
     public getCourseById(course_id: string): Course | undefined {
         return this.courses.find(course => course.course_id === course_id);
+    }
+
+    public getCourseByName(course_name: string): Course | undefined {
+        return this.courses.find(course => course.course_name === course_name);
     }
 
     public getAllCourses(): Course[] {

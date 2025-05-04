@@ -27,21 +27,29 @@ class RegistrationController {
 
             // Validate input
             if (!employee_name || !email || !course_id) {
-                return sendResponse(res, build("ALL_FIELDS_REQUIRED", { failure: { message: "ALL_FIELDS_REQUIRED" } }));
+                return sendResponse(res, build("ALL_FIELDS_REQUIRED", { failure: { message: "email and employee_name missing" } }));
             }else if (!validateEmail(email)) {
                 return sendResponse(res, build("INVALID_EMAIL_FORMAT", { failure: { message: "Email is required." } }));
             }else {
                 const courseData = await courseServices.getCourseById(course_id);
+                console.log("courseData", courseData);
                 if(!courseData){
                     return sendResponse(res, build("COURSE_ERROR", { failure: { message: "Course not found." } }));
                 } else{
-                    const totalRedistration = await registrationServicesNew.getRegistrationsForCourse(course_id);
-                    let status: 'ACCEPTED' | 'COURSE_FULL_ERROR' = 'ACCEPTED';
-                    if (totalRedistration.length >= courseData?.max_employees) {
+                    const totalRegistration = await registrationServicesNew.getRegistrationsForCourse(course_id);
+                    let status: 'ACCEPTED' | 'COURSE_FULL_ERROR' | 'COURSE_CANCELED' = 'ACCEPTED';
+                    const currentDate = new Date();
+                    const deadlineDate = new Date(courseData.start_date);
+                    
+                    if (currentDate > deadlineDate && totalRegistration.length < courseData?.min_employees) {
+                        status = 'COURSE_CANCELED';
+                    } else if (totalRegistration.length >= courseData?.max_employees) {
                         status = 'COURSE_FULL_ERROR';
+                    } else if (totalRegistration.length < courseData?.min_employees) {
+                        status = 'ACCEPTED';
                     }
 
-                    const registration_id = await generateRegistrationId(employee_name,email);
+                    const registration_id = generateRegistrationId(employee_name, courseData.course_name);
                     const registrationInput = {
                         registration_id : registration_id,
                         employee_name : employee_name,
@@ -58,9 +66,23 @@ class RegistrationController {
                     } else{
                         const registration = await registrationServicesNew.createRegistration(registrationInput);
                         if (registration.status === 'COURSE_FULL_ERROR') {
-                            return sendResponse(res, build("COURSE_FULL_ERROR", { failure: { message: "COURSE_FULL_ERROR" } }));
+                            return sendResponse(res, build("COURSE_FULL_ERROR", { failure: { message: "Course is full" } }));
+                        } else if (registration.status === 'COURSE_CANCELED') {
+                            return sendResponse(res, build("COURSE_CANCELED", { failure: { message: "Course has been canceled" } }));
                         }
-                        return sendResponse(res, build("SUCCESSFULLY_REGISTERED", {  sucess: { registration_id: registration.registration_id, status: registration.status }}));
+                        return sendResponse(res, build("SUCCESSFULLY_REGISTERED", { 
+                            success: registration.status === 'ACCEPTED' ? {
+                                registration_id: registration_id,
+                                status: registration.status,
+                                course_id: course_id
+                            } : registration.status === 'COURSE_FULL_ERROR' ? {
+                                registration_id: registration_id,
+                                status: registration.status
+                            } : {
+                                registration_id: registration_id,
+                                status: registration.status
+                            }
+                        }));
                         }
                     }
                 }
