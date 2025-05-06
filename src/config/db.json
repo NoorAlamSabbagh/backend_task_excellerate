@@ -1,31 +1,31 @@
 {
   "courses": [
     {
-      "course_id": "OFFERING-GO1-GO-LANG1",
-      "course_name": "GO1",
-      "instructor_name": "GO Lang1",
-      "start_date": "05052025",
+      "course_id": "OFFERING-PYTHON1-NOOR1",
+      "course_name": "Python1",
+      "instructor_name": "Noor1",
+      "start_date": "06052025",
       "min_employees": 1,
-      "max_employees": 2,
+      "max_employees": 3,
       "is_allotted": true
     },
     {
-      "course_id": "OFFERING-GO2-GO-LANG2",
-      "course_name": "GO2",
-      "instructor_name": "GO Lang2",
-      "start_date": "05052025",
+      "course_id": "OFFERING-PYTHON1-NOOR1",
+      "course_name": "Python1",
+      "instructor_name": "Noor1",
+      "start_date": "06052025",
       "min_employees": 1,
-      "max_employees": 2,
+      "max_employees": 3,
       "is_allotted": false
     }
   ],
   "registrations": [
     {
-      "registration_id": "ALAM12-GO1",
-      "employee_name": "Alam12",
-      "email": "alam@1234.com",
-      "course_id": "OFFERING-GO1-GO-LANG1",
-      "status": "COURSE_FULL_ERROR"
+      "registration_id": "NOOR12-PYTHON1",
+      "employee_name": "Noor12",
+      "email": "Noor12@gmail.com",
+      "course_id": "OFFERING-PYTHON1-NOOR1",
+      "status": "ACCEPTED"
     }
   ]
 }

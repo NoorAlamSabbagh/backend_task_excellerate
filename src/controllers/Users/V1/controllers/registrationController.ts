@@ -32,7 +32,6 @@ class RegistrationController {
                 return sendResponse(res, build("INVALID_EMAIL_FORMAT", { failure: { message: "Email is required." } }));
             }else {
                 const courseData = await courseServices.getCourseById(course_id);
-                console.log("courseData", courseData);
                 if(!courseData){
                     return sendResponse(res, build("COURSE_ERROR", { failure: { message: "Course not found." } }));
                 } else{

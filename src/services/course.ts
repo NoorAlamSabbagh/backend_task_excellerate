@@ -66,7 +66,6 @@ class CourseModel {
         return newCourse;
     }
 
-    ////////////////////
    public allotCourse(course_id: string): AllotmentResult[] {
         const course = this.getCourseById(course_id);
         if (!course) throw new Error('Course not found');
@@ -97,7 +96,6 @@ class CourseModel {
 
         return results;
     }
-    ////////////
 
     public getCourseById(course_id: string): Course | undefined {
         return this.courses.find(course => course.course_id === course_id);
